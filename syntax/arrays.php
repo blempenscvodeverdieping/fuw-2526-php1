@@ -3,43 +3,42 @@
 $gebruikers = [
     [
         "username" => "blempens",
-        "password"=> "test123",
-        "isAdmin" => true
+        "password" => "test123",
+        "isAdmin" => true,
     ],
     [
         "username" => "ziggy",
-        "password"=> "test12345",
-        "isAdmin" => false
+        "password" => "test12345",
+        "isAdmin" => false,
     ],
     [
         "username" => "natalie",
-        "password"=> "123test",
-        "isAdmin" => false
+        "password" => "123test",
+        "isAdmin" => false,
     ],
     [
         "username" => "dilan",
-        "password"=> "dilanrulz",
-        "isAdmin" => false
+        "password" => "dilanrulz",
+        "isAdmin" => false,
     ],
     [
         "username" => "mitchell",
-        "password"=> "mitchellrulz",
-        "isAdmin" => false
+        "password" => "mitchellrulz",
+        "isAdmin" => false,
     ],
     [
         "username" => "stef",
-        "password"=> "Duvel123",
-        "isAdmin" => true
+        "password" => "Duvel123",
+        "isAdmin" => true,
     ],
 ];
 
 $admins = $gebruikers;
-foreach($admins as $key => $gebruiker) {
+foreach ($admins as $key => $gebruiker) {
     if ($gebruiker["isAdmin"] === false) {
         unset($admins[$key]);
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,11 +54,11 @@ foreach($admins as $key => $gebruiker) {
 <p>Er zijn <?php echo count($gebruikers); ?> gebruikers.</p>
 
 <ul>
-    <?php foreach($gebruikers as $gebruiker): ?>
+    <?php foreach ($gebruikers as $gebruiker): ?>
         <li>
-            Username: <?php echo $gebruiker['username'] ?><br>
-            Password: <?php echo $gebruiker['password'] ?> <br>
-            <?php if($gebruiker['isAdmin']): ?>
+            Username: <?php echo $gebruiker["username"]; ?><br>
+            Password: <?php echo $gebruiker["password"]; ?> <br>
+            <?php if ($gebruiker["isAdmin"]): ?>
                 Deze gebruikers <b>is admin</b>
             <?php else: ?>
                 Deze gebruikers <b>is geen admin</b>
@@ -71,11 +70,11 @@ foreach($admins as $key => $gebruiker) {
 <h2>Admins</h2>
 
 <ul>
-    <?php foreach($admins as $gebruiker): ?>
+    <?php foreach ($admins as $gebruiker): ?>
         <li>
-            Username: <?php echo $gebruiker['username'] ?><br>
-            Password: <?php echo $gebruiker['password'] ?> <br>
-            <?php if($gebruiker['isAdmin']): ?>
+            Username: <?php echo $gebruiker["username"]; ?><br>
+            Password: <?php echo $gebruiker["password"]; ?> <br>
+            <?php if ($gebruiker["isAdmin"]): ?>
                 Deze gebruikers <b>is admin</b>
             <?php else: ?>
                 Deze gebruikers <b>is geen admin</b>
@@ -83,6 +82,6 @@ foreach($admins as $key => $gebruiker) {
         </li>
     <?php endforeach; ?>
 </ul>
-    
+
 </body>
 </html>
