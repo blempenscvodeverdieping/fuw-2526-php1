@@ -33,15 +33,17 @@ $films = [
 
     <h2>Leerlingen en scores</h2>
     <ul>
+        <!-- <li>Bert: 58/100</li> -->
         <?php foreach ($leerlingen as $key => $leerling): ?>
-        <li><?php echo $leerling; ?>: <?php echo $scores[$key]; ?>/100</li>
+            <li><?php echo $leerling; ?>: <?php echo $scores[$key]; ?>/100</li>
         <?php endforeach; ?>
     </ul>
 
     <h2>Films en scores</h2>
     <ul>
+        <!-- <li>Inception: 87/100</li> -->
         <?php foreach ($films as $film): ?>
-        <li><?php echo $film["naam"]; ?>: <?php echo $film["score"]; ?>/100</li>
+            <li><?php echo $film["naam"]; ?>: <?php echo $film["score"]; ?>/100</li>
         <?php endforeach; ?>
     </ul>
 
