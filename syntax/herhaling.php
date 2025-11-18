@@ -1,15 +1,73 @@
-<?php 
-
+<?php
 // Definieer een "ingelogd" variabele.
+$ingelogd = false;
 // Definieer een "username" variabele.
+$username = "Bert";
 // Definieer een huidig_jaar waarbij het huidige jaar altijd berekend wordt.
-
+$huidigeJaar = date("Y");
 // Definieer een geindexeerde array met categorien: html, css, php, javascript.
 // Zie het html element "categorieen" hieronder.
-
+$categorieen = ["HTML", "CSS", "PHP", "Javascript"];
 // Definieer een associatieve array met blogposts: id, titel, datum en content.
 // Zie het html element over artikels hieronder.
-
+$posts = [
+    [
+        "id" => 1,
+        "titel" => "Eerste artikel",
+        "datum" => "21-11-2022",
+        "content" =>
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.",
+    ],
+    [
+        "id" => 2,
+        "titel" => "Tweede artikel",
+        "datum" => "22-11-2022",
+        "content" =>
+            "Dit is het tweede artikel. Het bevat ook wat tekst om te tonen hoe een artikel eruit ziet.",
+    ],
+    [
+        "id" => 1,
+        "titel" => "Eerste artikel",
+        "datum" => "21-11-2022",
+        "content" =>
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.",
+    ],
+    [
+        "id" => 2,
+        "titel" => "Tweede artikel",
+        "datum" => "22-11-2022",
+        "content" =>
+            "Dit is het tweede artikel. Het bevat ook wat tekst om te tonen hoe een artikel eruit ziet.",
+    ],
+    [
+        "id" => 1,
+        "titel" => "Eerste artikel",
+        "datum" => "21-11-2022",
+        "content" =>
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.",
+    ],
+    [
+        "id" => 2,
+        "titel" => "Tweede artikel",
+        "datum" => "22-11-2022",
+        "content" =>
+            "Dit is het tweede artikel. Het bevat ook wat tekst om te tonen hoe een artikel eruit ziet.",
+    ],
+    [
+        "id" => 1,
+        "titel" => "Eerste artikel",
+        "datum" => "21-11-2022",
+        "content" =>
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.",
+    ],
+    [
+        "id" => 2,
+        "titel" => "Tweede artikel",
+        "datum" => "22-11-2022",
+        "content" =>
+            "Dit is het tweede artikel. Het bevat ook wat tekst om te tonen hoe een artikel eruit ziet.",
+    ],
+];
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -29,9 +87,14 @@
             <a class="hover:underline" href="#">Contact</a>
             <!-- Toon de span en de afmelden-link af indien ingelogd. Druk de aanmelden link af indien niet ingelogd. -->
             <!-- Druk de username of "gast" af -->
-            <span class="ml-auto px-4 py-2 bg-gray-800">Hallo, gast / Bert</span>
+            <span class="ml-auto px-4 py-2 bg-gray-800">Hallo, <?= $ingelogd
+                ? $username
+                : "Gast" ?></span>
+            <?php if ($ingelogd): ?>
             <a class="hover:underline" href="#">Afmelden</a>
+            <?php else: ?>
             <a class="hover:underline" href="#">Aanmelden</a>
+            <?php endif; ?>
         </div>
     </nav>
 
@@ -42,69 +105,63 @@
                     <h1 class="font-semibold text-2xl">
                         Artikels
                     </h1>
-                    <a href="add.php" class="bg-green-500 text-green-100 px-2 rounded inline-block">+ add</a>
+                    <?php if ($ingelogd): ?>
+                        <a href="add.php" class="bg-green-500 text-green-100 px-2 rounded inline-block">+ add</a>
+                    <?php endif; ?>
                 </div>
                 <div class="flex gap-2">
                     <b>Categoriëen: </b>
                     <!-- Overloop de array van categorieen. Toon de SPAN indien er geen categorieen zijn. -->
                     <!-- <span>Er zijn nog geen categoriëen</span> -->
-                    <a class="text-blue-500 underline" href="category.php?id=1">HTML</a>
-                    <a class="text-blue-500 underline" href="category.php?id=2">CSS</a>
-                    <a class="text-blue-500 underline" href="category.php?id=3">PHP</a>
-                    <a class="text-blue-500 underline" href="category.php?id=4">Javascript</a>
+                    <?php if (!$categorieen): ?>
+                        <span>Er zijn nog geen categoriëen.</span>
+                    <?php else: ?>
+                        <?php foreach ($categorieen as $key => $categorie): ?>
+                            <a class="text-blue-500 underline" href="category.php?id=<?= $key ?>">
+                                <?= $categorie ?>
+                            </a>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </header>
 
             <!-- Overloop de artikel array. Indien geen artikel, toon de bijhorende P -->
             <div class="grid gap-4">
-                <!-- <p class="bg-gray-200 p-4 rounded">Er zijn geen artikels. Voeg eerst aan artikel toe.</p> -->
-                <article class="bg-gray-100 p-4">
-                    <header class="mb-2">
-                        <h1 class="font-semibold text-lg"><a class="text-blue-500 underline" href="article.php?id=1">Eerste artikel</a></h1>
-                        <p class="opacity-75">Gepubliceerd op <time class="font-semibold">21-11-2022</time></p>
-                        <div class="flex gap-2 my-2">
-                            <a class="bg-orange-500 text-orange-100 px-2 rounded inline-block" href="edit.php?id=1">edit</a>
-                            <a class="bg-red-500 text-red-100 px-2 rounded inline-block" href="delete.php?id=1">delete</a>
-                        </div>
-                    </header>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.</p>
-                </article>
-                <article class="bg-gray-100 p-4">
-                    <header class="mb-2">
-                        <h1 class="font-semibold text-lg"><a class="text-blue-500 underline" href="article.php?id=1">Eerste artikel</a></h1>
-                        <p class="opacity-75">Gepubliceerd op <time class="font-semibold">21-11-2022</time></p>
-                        <div class="flex gap-2 my-2">
-                            <a class="bg-orange-500 text-orange-100 px-2 rounded inline-block" href="edit.php?id=1">edit</a>
-                            <a class="bg-red-500 text-red-100 px-2 rounded inline-block" href="delete.php?id=1">delete</a>
-                        </div>
-                    </header>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.</p>
-                </article>
-                <article class="bg-gray-100 p-4">
-                    <header class="mb-2">
-                        <h1 class="font-semibold text-lg"><a class="text-blue-500 underline" href="article.php?id=1">Eerste artikel</a></h1>
-                        <p class="opacity-75">Gepubliceerd op <time class="font-semibold">21-11-2022</time></p>
-                        <div class="flex gap-2 my-2">
-                            <a class="bg-orange-500 text-orange-100 px-2 rounded inline-block" href="edit.php?id=1">edit</a>
-                            <a class="bg-red-500 text-red-100 px-2 rounded inline-block" href="delete.php?id=1">Delete</a>
-                        </div>
-                    </header>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.</p>
-                </article>
-                <article class="bg-gray-100 p-4">
-                    <header class="mb-2">
-                        <h1 class="font-semibold text-lg"><a class="text-blue-500 underline" href="article.php?id=1">Eerste artikel</a></h1>
-                        <p class="opacity-75">Gepubliceerd op <time class="font-semibold">21-11-2022</time></p>
-                        <div class="flex gap-2 my-2">
-                            <a class="bg-orange-500 text-orange-100 px-2 rounded inline-block" href="edit.php?id=1">edit</a>
-                            <a class="bg-red-500 text-red-100 px-2 rounded inline-block" href="delete.php?id=1">delete</a>
-                        </div>
-                    </header>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum unde necessitatibus adipisci similique, nemo, tempora numquam doloribus atque magni error a rem molestiae excepturi, quasi recusandae aperiam saepe culpa odio.</p>
-                </article>
-                <footer>
-                    <a class="inline-block bg-blue-500 hover:bg-blue-600 text-blue-100 px-4 py-2 rounded" href="#">Meer artikels</a>
-                </footer>
+                <?php if (empty($posts)): ?>
+                 <p class="bg-gray-200 p-4 rounded">Er zijn geen artikels. Voeg eerst aan artikel toe.</p>
+                 <?php else: ?>
+                    <?php foreach ($posts as $key => $post): ?>
+                        <?php if ($key > 4) {
+                            break;
+                        } ?>
+                        <article class="bg-gray-100 p-4">
+                            <header class="mb-2">
+                                <h1 class="font-semibold text-lg"><a class="text-blue-500 underline" href="article.php?id=<?= $post[
+                                    "id"
+                                ] ?>"><?= $post["titel"] ?></a></h1>
+                                <p class="opacity-75">Gepubliceerd op <time class="font-semibold"><?= $post[
+                                    "datum"
+                                ] ?></time></p>
+                                <?php if ($ingelogd): ?>
+                                    <div class="flex gap-2 my-2">
+                                        <a class="bg-orange-500 text-orange-100 px-2 rounded inline-block" href="edit.php?id=<?= $post[
+                                            "id"
+                                        ] ?>">edit</a>
+                                            <a class="bg-red-500 text-red-100 px-2 rounded inline-block" href="delete.php?id=<?= $post[
+                                                "id"
+                                            ] ?>">delete</a>
+                                    </div>
+                                <?php endif; ?>
+                            </header>
+                            <p><?= $post["content"] ?></p>
+                        </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <?php if (count($posts) > 5): ?>
+                    <footer>
+                        <a class="inline-block bg-blue-500 hover:bg-blue-600 text-blue-100 px-4 py-2 rounded" href="#">Meer artikels</a>
+                    </footer>
+                <?php endif; ?>
             </div>
         </section>
         <aside class="bg-gray-100 p-4">
@@ -124,21 +181,11 @@
                     <p class="block font-semibold">Welke score geef je ons?</p>
                     <div class="flex gap-4">
                         <!-- Gebruik de juiste lus structuur om het label 5 keren te overlopen. -->
-                        <label for="score_1" class="block">
-                            <input type="radio" name="score" id="score_1"> 1
-                        </label>
-                        <label for="score_2" class="block">
-                            <input type="radio" name="score" id="score_2"> 2
-                        </label>
-                        <label for="score_3" class="block">
-                            <input type="radio" name="score" id="score_3"> 3
-                        </label>
-                        <label for="score_4" class="block">
-                            <input type="radio" name="score" id="score_4"> 4
-                        </label>
-                        <label for="score_5" class="block">
-                            <input type="radio" name="score" id="score_5"> 5
-                        </label>
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <label for="score_<?= $i ?>" class="block">
+                                <input type="radio" name="score" id="score_<?= $i ?>"> <?= $i ?>
+                            </label>
+                        <?php endfor; ?>
                     </div>
                 </div>
                 <div>
@@ -150,7 +197,7 @@
 
     <!-- Gebruik de juiste functie om het huidige jaar af te drukken -->
     <footer class="text-center text-sm my-12">
-        Copyright 2023 CVO De verdieping
+        Copyright <?= $huidigeJaar ?> CVO De verdieping
     </footer>
 
 </body>
