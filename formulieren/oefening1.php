@@ -7,12 +7,20 @@
 	<link rel="stylesheet" href="oefening1.css">
 </head>
 <body>
+<?php
+// Tijdelijk: weghalen in productieomgeving
+?>
+    <pre>POST: <?php print_r($_POST); ?></pre>
+    <pre>GET: <?php print_r($_GET); ?></pre>
 
     <h1>Contacteer ons</h1>
     <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis totam blanditiis voluptate voluptatibus repellendus eligendi itaque ex natus qui eum voluptates pariatur officia, beatae animi ullam sequi voluptas cum atque?
     </p>
 
+<?php
+// probeer ook eens de "get" methode
+?>
     <form action="" method="post">
         <div>
             <label for="naam">Naam</label>
@@ -45,10 +53,10 @@
             <label>Ik wil me inschrijven voor de nieuwsbrief</label>
             <div>
                 <label>
-                    <input type="radio" name="nieuwsbrief" id="nieuwsbrief"> Ja, ik wil me inschrijven
+                    <input type="radio" name="nieuwsbrief" id="nieuwsbrief_ja"> Ja, ik wil me inschrijven
                 </label>
                 <label>
-                    <input type="radio" name="nieuwsbrief" id="nieuwsbrief"> Nee, ik wil me niet inschrijven
+                    <input type="radio" name="nieuwsbrief" id="nieuwsbrief_nee"> Nee, ik wil me niet inschrijven
                 </label>
             </div>
         </div>
