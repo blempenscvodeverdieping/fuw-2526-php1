@@ -1,0 +1,38 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.25em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    display: block;
+}
+
+textarea {
+    width: 300px;
+    height: 100px;
+}
+
+.nieuwsbrief {
+    background: lightgray;
+    padding: 1em;
+}
+
+.nieuwsbrief > label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.nieuwsbrief > div {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
