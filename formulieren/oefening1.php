@@ -10,8 +10,8 @@
 <?php
 // Tijdelijk: weghalen in productieomgeving
 ?>
-    <pre>POST: <?php print_r($_POST); ?></pre>
-    <pre>GET: <?php print_r($_GET); ?></pre>
+<pre>POST: <?php print_r($_POST); ?></pre>
+<pre>GET: <?php print_r($_GET); ?></pre>
 
     <h1>Contacteer ons</h1>
     <p>
@@ -24,11 +24,11 @@
     <form action="" method="post">
         <div>
             <label for="naam">Naam</label>
-            <input type="text" name="naam" id="naam">
+            <input value="Bert" type="text" name="naam" id="naam">
         </div>
         <div>
             <label for="email">Emailadres</label>
-            <input type="email" name="email">
+            <input value="blempens@cvodeverdieping.be" type="email" name="email">
         </div>
         <div>
             <label for="onderwerp">Onderwerp</label>
@@ -45,7 +45,7 @@
         </div>
         <div>
             <label>
-                <input type="checkbox" name="voorwaarden" id="voorwaarden">
+                <input checked type="checkbox" name="voorwaarden" id="voorwaarden">
                 Ik accepteer de voorwaarden
             </label>
         </div>
@@ -53,10 +53,10 @@
             <label>Ik wil me inschrijven voor de nieuwsbrief</label>
             <div>
                 <label>
-                    <input type="radio" name="nieuwsbrief" id="nieuwsbrief_ja"> Ja, ik wil me inschrijven
+                    <input value="ja" type="radio" name="nieuwsbrief"> Ja, ik wil me inschrijven
                 </label>
                 <label>
-                    <input type="radio" name="nieuwsbrief" id="nieuwsbrief_nee"> Nee, ik wil me niet inschrijven
+                    <input checked value="nee" type="radio" name="nieuwsbrief"> Nee, ik wil me niet inschrijven
                 </label>
             </div>
         </div>
