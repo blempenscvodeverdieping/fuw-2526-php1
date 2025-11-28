@@ -35,4 +35,15 @@ textarea {
 .nieuwsbrief > div {
     display: flex;
     flex-direction: column;
-    gap: .5em;
+    gap: 0.5em;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.success {
+    color: green;
+    font-size: 0.9em;
+}
