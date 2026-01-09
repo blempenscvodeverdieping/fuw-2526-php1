@@ -9,7 +9,7 @@
     <h1>Dokterspraktijk</h1>
     <h2>Patienten</h2>
     <p><a href="index.php">Terug naar hoofdpagina</a></p>
-    <p><a href="patient-toevoegen">Nieuwe patient toevoegen</a></p>
+    <p><a href="patient-toevoegen.php">Nieuwe patient toevoegen</a></p>
 
     <table>
         <thead>

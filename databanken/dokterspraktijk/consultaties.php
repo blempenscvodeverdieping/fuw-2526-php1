@@ -9,7 +9,7 @@
     <h1>Dokterspraktijk</h1>
     <h2>Consultaties</h2>
     <p><a href="index.php">Terug naar hoofdpagina</a></p>
-    <p><a href="consultatie-toevoegen">Nieuwe consultatie toevoegen</a></p>
+    <p><a href="consultatie-toevoegen.php">Nieuwe consultatie toevoegen</a></p>
 
     <table>
         <thead>

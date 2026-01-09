@@ -9,7 +9,7 @@
     <h1>Dokterspraktijk</h1>
     <h2>Aandoeningen</h2>
     <p><a href="index.php">Terug naar hoofdpagina</a></p>
-    <p><a href="aandoening-toevoegen">Nieuwe aandoening toevoegen</a></p>
+    <p><a href="aandoening-toevoegen.php">Nieuwe aandoening toevoegen</a></p>
 
     <table>
         <thead>
