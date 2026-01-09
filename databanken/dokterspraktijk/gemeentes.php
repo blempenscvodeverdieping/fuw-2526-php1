@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+try {
+    $stmt = $pdo->query("SELECT * FROM gemeentes");
+    $gemeentes = $stmt->fetchAll();
+} catch (PDOException $e) {
+    die("Fout bij ophalen van gemeentes: " . $e->getMessage());
+}
+
+//print_r($gemeentes);
+//exit();
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -21,15 +34,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Test</td>
-                <td>3660</td>
-                <td>
-                    <a href="gemeente-aanpassen.php?id=1">Aanpassen</a>
-                    <a href="gemeente-verwijderen.php?id=1">Verwijderen</a>
-                </td>
-            </tr>
+            <?php foreach ($gemeentes as $gemeente): ?>
+                <tr>
+                    <td><a href="gemeente.php?id=<?= $gemeente[
+                        "id"
+                    ] ?>"><?= $gemeente["id"] ?></a></td>
+                    <td><?= $gemeente["naam"] ?></td>
+                    <td><?= $gemeente["postcode"] ?></td>
+                    <td>
+                        <a href="gemeente-aanpassen.php?id=<?= $gemeente[
+                            "id"
+                        ] ?>">Aanpassen</a>
+                        <a href="gemeente-verwijderen.php?id=<?= $gemeente[
+                            "id"
+                        ] ?>">Verwijderen</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </body>

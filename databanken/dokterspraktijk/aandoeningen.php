@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+try {
+    $stmt = $pdo->query("SELECT * FROM aandoeningen");
+    $aandoeningen = $stmt->fetchAll();
+} catch (PDOException $e) {
+    die("Fout bij ophalen van aandoeningen: " . $e->getMessage());
+}
+
+//print_r($aandoeningen);
+//exit();
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -20,14 +33,22 @@
             </tr>
         </thead>
         <tbody>
+        <?php foreach ($aandoeningen as $aandoening): ?>
             <tr>
-                <td>1</td>
-                <td>Test</td>
+                <td><a href="aandoening.php?id=<?= $aandoening[
+                    "id"
+                ] ?>"><?= $aandoening["id"] ?></a></td>
+                <td><?= $aandoening["naam"] ?></td>
                 <td>
-                    <a href="aandoening-aanpassen.php?id=1">Aanpassen</a>
-                    <a href="aandoening-verwijderen.php?id=1">Verwijderen</a>
+                    <a href="aandoening-aanpassen.php?id=<?= $aandoening[
+                        "id"
+                    ] ?>">Aanpassen</a>
+                    <a href="aandoening-verwijderen.php?id=<?= $aandoening[
+                        "id"
+                    ] ?>">Verwijderen</a>
                 </td>
             </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </body>
