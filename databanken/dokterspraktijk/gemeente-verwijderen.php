@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+if (!isset($_GET["id"])) {
+    die("Fout bij ophalen van gemeente: Geen ID gevonden.");
+}
+
+// Controleren of verzonden is
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        $id = $_GET["id"];
+        $stmt = $pdo->prepare("DELETE FROM gemeentes WHERE id=:id");
+        $stmt->execute([
+            ":id" => $id,
+        ]);
+
+        header("location:gemeentes.php");
+        exit();
+    } catch (PDOException $e) {
+        die("Fout bij verwijderen van gemeente: " . $e->getMessage());
+    }
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">

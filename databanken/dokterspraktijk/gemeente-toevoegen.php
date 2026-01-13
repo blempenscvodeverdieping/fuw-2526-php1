@@ -1,4 +1,35 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+// Initialiseren
+$naam = $postcode = "";
+$melding = null;
+$errors = [];
+
+// Controleren of verzonden is
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "includes/gemeente-validatie.php";
+
+    if (empty($errors)) {
+        try {
+            $stmt = $pdo->prepare(
+                "INSERT INTO gemeentes (naam, postcode) VALUES (:naam, :postcode)",
+            );
+            $stmt->execute([
+                ":naam" => $naam,
+                ":postcode" => $postcode,
+            ]);
+            $melding = "Gemeente is toegevoegd!";
+        } catch (PDOException $e) {
+            die("Fout bij toevoegen van gemeente: " . $e->getMessage());
+        }
+    }
+}
+
+// Formulier terug invullen
+// Foutmeldingen tonen
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -12,16 +43,7 @@
     <p><a href="gemeentes.php">Terug naar overzicht</a></p>
 
     <form method="post">
-        <div>
-            <label for="naam">Naam</label>
-            <input type="text" name="naam" id="naam">
-            <p class="error">Naam is verplicht</p>
-        </div>
-        <div>
-            <label for="postcode">Postcode</label>
-            <input type="text" name="postcode" id="postcode">
-            <p class="error">Postcode is verplicht</p>
-        </div>
+        <?php require_once "includes/gemeente-formulier.php"; ?>
         <div>
             <button type="submit">Gemeente toevoegen</button>
         </div>

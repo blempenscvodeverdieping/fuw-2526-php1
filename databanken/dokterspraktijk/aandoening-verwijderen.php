@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+if (!isset($_GET["id"])) {
+    die("Fout bij ophalen van aandoening: Geen ID gevonden.");
+}
+
+// Controleren of verzonden is
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "includes/aandoening-verwijderen.php";
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">

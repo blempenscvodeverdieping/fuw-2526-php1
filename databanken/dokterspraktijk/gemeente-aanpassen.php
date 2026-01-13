@@ -1,4 +1,50 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+if (!isset($_GET["id"])) {
+    die("Fout bij ophalen van gemeente: Geen ID gevonden.");
+}
+
+try {
+    $id = $_GET["id"];
+    $stmt = $pdo->prepare("SELECT * FROM gemeentes WHERE id=:id");
+    $stmt->execute([":id" => $id]);
+    $gemeente = $stmt->fetch();
+} catch (PDOException $e) {
+    die("Fout bij ophalen van gemeente: " . $e->getMessage());
+}
+
+// Initialiseren
+$naam = $gemeente["naam"];
+$postcode = $gemeente["postcode"];
+$melding = null;
+$errors = [];
+
+// Controleren of verzonden is
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "includes/gemeente-validatie.php";
+
+    if (empty($errors)) {
+        try {
+            $stmt = $pdo->prepare(
+                "UPDATE gemeentes SET naam=:naam, postcode=:postcode WHERE id=:id",
+            );
+            $stmt->execute([
+                ":naam" => $naam,
+                ":postcode" => $postcode,
+                ":id" => $id,
+            ]);
+            $melding = "Gemeente is aangepast!";
+        } catch (PDOException $e) {
+            die("Fout bij aanpassen van gemeente: " . $e->getMessage());
+        }
+    }
+}
+
+// Formulier terug invullen
+// Foutmeldingen tonen
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -12,16 +58,7 @@
     <p><a href="gemeentes.php">Terug naar overzicht</a></p>
 
     <form method="post">
-        <div>
-            <label for="naam">Naam</label>
-            <input type="text" name="naam" id="naam">
-            <p class="error">Naam is verplicht</p>
-        </div>
-        <div>
-            <label for="postcode">Postcode</label>
-            <input type="text" name="postcode" id="postcode">
-            <p class="error">Postcode is verplicht</p>
-        </div>
+        <?php require_once "includes/gemeente-formulier.php"; ?>
         <div>
             <button type="submit">Gemeente aanpassen</button>
         </div>

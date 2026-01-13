@@ -3,7 +3,7 @@
 require_once "db.php";
 
 if (!isset($_GET["id"])) {
-    die("Fout bij ophalen van aandoening: Geen ID gevonden.");
+    die("Fout bij ophalen van gemeente: Geen ID gevonden.");
 }
 
 try {
