@@ -2,6 +2,10 @@
 
 require_once "db.php";
 
+if (!isset($_GET["id"])) {
+    die("Fout bij ophalen van aandoening: Geen ID gevonden.");
+}
+
 try {
     $id = $_GET["id"];
     $stmt = $pdo->prepare("SELECT * FROM gemeentes WHERE id=:id");

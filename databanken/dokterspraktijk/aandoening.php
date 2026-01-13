@@ -2,6 +2,11 @@
 
 require_once "db.php";
 
+if (!isset($_GET["id"])) {
+    header("location: aandoeningen.php");
+    exit();
+}
+
 try {
     $id = $_GET["id"];
     $stmt = $pdo->prepare("SELECT * FROM aandoeningen WHERE id=:id");
