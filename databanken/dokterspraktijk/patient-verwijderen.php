@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+require_once "db.php";
+
+require_once "includes/patient-ophalen.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "includes/patient-verwijderen.php";
+
+    header("Location: patienten.php");
+    exit();
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">

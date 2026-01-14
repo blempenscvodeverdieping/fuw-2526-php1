@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+<?php
+require_once "db.php";
+
+$voornaam = $achternaam = $bloedgroep_id = $gemeente_id = $geboortedatum = "";
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "includes/patient-validatie.php";
+
+    if (empty($errors)) {
+        require_once "includes/patient-toevoegen.php";
+
+        header("Location: patienten.php");
+        exit();
+    }
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -12,35 +28,7 @@
     <p><a href="patienten.php">Terug naar overzicht</a></p>
 
     <form method="post">
-        <div>
-            <label for="voornaam">Voornaam</label>
-            <input type="text" name="voornaam" id="voornaam">
-            <p class="error">Voornaam is verplicht</p>
-        </div>
-        <div>
-            <label for="naam">Achternaam</label>
-            <input type="text" name="naam" id="naam">
-            <p class="error">Achternaam is verplicht</p>
-        </div>
-        <div>
-            <label for="bloedgroep_id">Bloedgroep</label>
-            <select name="bloedgroep_id" id="bloedgroep_id">
-                <option value="1">A+</option>
-            </select>
-            <p class="error">Bloedgroep is verplicht</p>
-        </div>
-        <div>
-            <label for="gemeente_id">Gemeente</label>
-            <select name="gemeente_id" id="gemeente_id">
-                <option value="1">3690 Bree</option>
-            </select>
-            <p class="error">Gemeente is verplicht</p>
-        </div>
-        <div>
-            <label for="geboortedatum">Geboortedatum</label>
-            <input type="date" name="geboortedatum" id="geboortedatum">
-            <p class="error">Geboortedatum is verplicht</p>
-        </div>
+        <?php require_once "includes/patient-formulier.php"; ?>
         <div>
             <button type="submit">Patient toevoegen</button>
         </div>

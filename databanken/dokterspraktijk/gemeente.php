@@ -18,6 +18,23 @@ try {
 if (!$gemeente) {
     die("Fout bij ophalen van gemeente: Geen gemeente gevonden.");
 }
+
+try {
+    $stmt = $pdo->prepare(
+        "SELECT patienten.*,
+            bloedgroepen.type AS bloedgroep,
+            gemeentes.naam AS gemeente_naam,
+            gemeentes.postcode AS gemeente_postcode
+        FROM patienten
+        JOIN bloedgroepen ON patienten.bloedgroep_id=bloedgroepen.id
+        JOIN gemeentes ON patienten.gemeente_id=gemeentes.id
+        WHERE gemeente_id=:id",
+    );
+    $stmt->execute([":id" => $id]);
+    $patienten = $stmt->fetchAll();
+} catch (PDOException $e) {
+    die("Fout bij ophalen van patienten: " . $e->getMessage());
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,5 +50,8 @@ if (!$gemeente) {
 
     <h3><?= $gemeente["naam"] ?></h3>
     <p>Postcode: <?= $gemeente["postcode"] ?></p>
+
+    <h4>Patienten</h4>
+    <?php require_once "includes/patienten-tabel.php"; ?>
 </body>
 </html>
