@@ -15,8 +15,9 @@ try {
     die("Fout bij ophalen van gemeente: " . $e->getMessage());
 }
 
-//print_r($gemeentes);
-//exit();
+if (!$gemeente) {
+    die("Fout bij ophalen van gemeente: Geen gemeente gevonden.");
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,5 +1,6 @@
 <?php
 
+// Databank connectie maken
 require_once "db.php";
 
 // Initialiseren
@@ -9,9 +10,11 @@ $errors = [];
 
 // Controleren of verzonden is
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Gegevens valideren
     require_once "includes/gemeente-validatie.php";
 
     if (empty($errors)) {
+        // INSERT query uitvoeren
         try {
             $stmt = $pdo->prepare(
                 "INSERT INTO gemeentes (naam, postcode) VALUES (:naam, :postcode)",

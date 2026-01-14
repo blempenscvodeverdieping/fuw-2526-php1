@@ -6,6 +6,19 @@ if (!isset($_GET["id"])) {
     die("Fout bij ophalen van gemeente: Geen ID gevonden.");
 }
 
+try {
+    $id = $_GET["id"];
+    $stmt = $pdo->prepare("SELECT * FROM gemeentes WHERE id=:id");
+    $stmt->execute([":id" => $id]);
+    $gemeente = $stmt->fetch();
+} catch (PDOException $e) {
+    die("Fout bij ophalen van gemeente: " . $e->getMessage());
+}
+
+if (!$gemeente) {
+    die("Fout bij ophalen van gemeente: Geen gemeente gevonden.");
+}
+
 // Controleren of verzonden is
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {

@@ -1,11 +1,14 @@
 <?php
 
+// Databank connectie maken
 require_once "db.php";
 
+// Controleren of ID in url zit
 if (!isset($_GET["id"])) {
     die("Fout bij ophalen van gemeente: Geen ID gevonden.");
 }
 
+// Gegevens ophalen
 try {
     $id = $_GET["id"];
     $stmt = $pdo->prepare("SELECT * FROM gemeentes WHERE id=:id");
@@ -15,7 +18,11 @@ try {
     die("Fout bij ophalen van gemeente: " . $e->getMessage());
 }
 
-// Initialiseren
+if (!$gemeente) {
+    die("Fout bij ophalen van gemeente: Geen gemeente gevonden.");
+}
+
+// Initialiseren met die gegevens
 $naam = $gemeente["naam"];
 $postcode = $gemeente["postcode"];
 $melding = null;
@@ -23,9 +30,11 @@ $errors = [];
 
 // Controleren of verzonden is
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Valideren
     require_once "includes/gemeente-validatie.php";
 
     if (empty($errors)) {
+        // Update query uitvoeren
         try {
             $stmt = $pdo->prepare(
                 "UPDATE gemeentes SET naam=:naam, postcode=:postcode WHERE id=:id",
