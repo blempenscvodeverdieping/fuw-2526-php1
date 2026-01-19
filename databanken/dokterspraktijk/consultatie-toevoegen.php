@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+$datum = $patient_id = $aandoening_id = $notities = "";
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "includes/consultatie-validatie.php";
+
+    if (!$errors) {
+        require_once "includes/consultatie-toevoegen.php";
+
+        header("location: consultaties.php");
+        exit();
+    }
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -12,29 +29,7 @@
     <p><a href="consultaties.php">Terug naar overzicht</a></p>
 
     <form method="post">
-        <div>
-            <label for="datum">Datum</label>
-            <input type="datetime" name="datum" id="datum">
-            <p class="error">Datum is verplicht</p>
-        </div>
-        <div>
-            <label for="patient_id">Patient</label>
-            <select name="patient_id" id="patient_id">
-                <option value="1">Bert Lempens (1985-11-21)</option>
-            </select>
-            <p class="error">Patient is verplicht</p>
-        </div>
-        <div>
-            <label for="aandoening_id">Aandoening</label>
-            <select name="aandoening_id" id="aandoening_id">
-                <option value="1">Ooronsteking</option>
-            </select>
-            <p class="error">Aandoening is verplicht</p>
-        </div>
-        <div>
-            <label for="notities">Notities</label>
-            <textarea name="notities" id="notities"></textarea>
-        </div>
+        <?php require_once "includes/consultatie-formulier.php"; ?>
         <div>
             <button type="submit">Consultatie toevoegen</button>
         </div>

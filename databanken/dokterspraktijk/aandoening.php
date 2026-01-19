@@ -1,6 +1,9 @@
 <?php
 require_once "db.php";
 require_once "includes/aandoening-ophalen.php";
+
+$aandoening_id = $aandoening["id"];
+require_once "includes/aandoening-consultaties-ophalen.php";
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,5 +19,8 @@ require_once "includes/aandoening-ophalen.php";
 
     <h3><?= $aandoening["naam"] ?></h3>
     <p><?= $aandoening["beschrijving"] ?></p>
+
+    <h4>Consultaties</h4>
+    <?php require_once "includes/consultaties-tabel.php"; ?>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php if (!$aandoeningen): ?>
+<p>Geen aandoeningen gevonden.</p>
+<?php else: ?>
 <table>
     <thead>
         <tr>
@@ -12,7 +15,9 @@
             <td><a href="aandoening.php?id=<?= $aandoening[
                 "id"
             ] ?>"><?= $aandoening["id"] ?></a></td>
-            <td><?= $aandoening["naam"] ?></td>
+            <td><a href="aandoening.php?id=<?= $aandoening[
+                "id"
+            ] ?>"><?= $aandoening["naam"] ?></a></td>
             <td>
                 <a href="aandoening-aanpassen.php?id=<?= $aandoening[
                     "id"
@@ -25,3 +30,4 @@
     <?php endforeach; ?>
     </tbody>
 </table>
+<?php endif; ?>

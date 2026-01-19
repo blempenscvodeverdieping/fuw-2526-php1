@@ -19,6 +19,9 @@ require_once "gemeentes-ophalen.php";
 <div>
     <label for="bloedgroep_id">Bloedgroep</label>
     <select name="bloedgroep_id" id="bloedgroep_id">
+        <?php if (!$bloedgroepen): ?>
+            <option disabled selected>Geen bloedgroepen</option>
+        <?php endif; ?>
         <?php foreach ($bloedgroepen as $bloedgroep): ?>
             <option
                 value="<?= $bloedgroep["id"] ?>"
@@ -36,6 +39,9 @@ require_once "gemeentes-ophalen.php";
 <div>
     <label for="gemeente_id">Gemeente</label>
     <select name="gemeente_id" id="gemeente_id">
+        <?php if (!$gemeentes): ?>
+            <option disabled selected>Geen gemeentes</option>
+        <?php endif; ?>
         <?php foreach ($gemeentes as $gemeente): ?>
             <option
                 value="<?= $gemeente["id"] ?>"

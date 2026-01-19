@@ -24,6 +24,9 @@ try {
     <p><a href="index.php">Terug naar hoofdpagina</a></p>
     <p><a href="gemeente-toevoegen.php">Nieuwe gemeente toevoegen</a></p>
 
+    <?php if (!$gemeentes): ?>
+    <p>Geen gemeentes gevonden.</p>
+    <?php else: ?>
     <table>
         <thead>
             <tr>
@@ -39,7 +42,9 @@ try {
                     <td><a href="gemeente.php?id=<?= $gemeente[
                         "id"
                     ] ?>"><?= $gemeente["id"] ?></a></td>
-                    <td><?= $gemeente["naam"] ?></td>
+                    <td><a href="gemeente.php?id=<?= $gemeente[
+                        "id"
+                    ] ?>"><?= $gemeente["naam"] ?></a></td>
                     <td><?= $gemeente["postcode"] ?></td>
                     <td>
                         <a href="gemeente-aanpassen.php?id=<?= $gemeente[
@@ -53,5 +58,6 @@ try {
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php endif; ?>
 </body>
 </html>

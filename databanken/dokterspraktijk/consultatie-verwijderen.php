@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+require_once "includes/consultatie-ophalen.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "includes/consultatie-verwijderen.php";
+
+    header("location: consultaties.php");
+    exit();
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">

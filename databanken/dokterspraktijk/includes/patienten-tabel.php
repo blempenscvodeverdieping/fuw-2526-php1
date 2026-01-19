@@ -1,3 +1,6 @@
+<?php if (!$patienten): ?>
+<p>Geen patienten gevonden.</p>
+<?php else: ?>
 <table>
     <thead>
         <tr>
@@ -18,8 +21,12 @@
     "id"
 ] ?></a>
         </td>
-        <td><?= $patient["voornaam"] ?></td>
-        <td><?= $patient["achternaam"] ?></td>
+        <td><a href="patient.php?id=<?= $patient["id"] ?>"><?= $patient[
+    "voornaam"
+] ?></a></td>
+        <td><a href="patient.php?id=<?= $patient["id"] ?>"><?= $patient[
+    "achternaam"
+] ?></a></td>
         <td><?= $patient["bloedgroep"] ?></td>
         <td><?= $patient["gemeente_postcode"] ?> <?= $patient[
      "gemeente_naam"
@@ -37,3 +44,4 @@
     <?php endforeach; ?>
     </tbody>
 </table>
+<?php endif; ?>

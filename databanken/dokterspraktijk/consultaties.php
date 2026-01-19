@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+
+require_once "db.php";
+
+try {
+    require_once "includes/consultaties-ophalen.php";
+} catch (PDOException $e) {
+    die("Fout bij ophalen van gegevens: " . $e->getMessage());
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -11,28 +20,6 @@
     <p><a href="index.php">Terug naar hoofdpagina</a></p>
     <p><a href="consultatie-toevoegen.php">Nieuwe consultatie toevoegen</a></p>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Datum</th>
-                <th>Patient</th>
-                <th>Aandoening</th>
-                <th>Handelingen</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>2000-01-01 18:20:30</td>
-                <td>Test Tester</td>
-                <td>Oorontsteking</td>
-                <td>
-                    <a href="consultatie-aanpassen.php?id=1">Aanpassen</a>
-                    <a href="consultatie-verwijderen.php?id=1">Verwijderen</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <?php require_once "includes/consultaties-tabel.php"; ?>
 </body>
 </html>
